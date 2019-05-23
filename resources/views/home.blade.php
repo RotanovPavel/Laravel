@@ -10,11 +10,16 @@
                 <div class="panel-body">
                     @if (session('status'))
                         <div class="alert alert-success" role="alert">
-                            {{ session('status') }}
+                          {{ session('status') }}
                         </div>
                     @endif
+                       <?php
+                            
 
-                    Hello {{Auth::user()->name}}! You are logged in!
+                        ?>
+
+                    Hello {{Auth::user()->username}}! You are logged in!
+
                 </div>
             </div>
         </div>
