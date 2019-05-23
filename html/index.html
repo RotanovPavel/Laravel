@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="utf-8">
+  <title></title>
+  <style media="screen">
+    body {
+      margin-top: 20px;
+      margin-left: 20px;
+    }
+    tr {
+      display: inline-flex;
+    }
+    td {
+      display: inline-block;
+      margin: 10px 10px 0 0;
+      width: 60px;
+      height: 45px;
+    }
+    .row {
+      margin-right: 5px;
+      font-family: Verdana, Arial, Helvetica, sans-serif;
+      color: #333366;
+    }
+  </style>
+
+</head>
+<body>
+  <div class="row">
+    <input type="text" name="text" id="blocks_input">
+    <button type="button" name="button" onclick="run()">Run</button>
+  </div>
+  <div class="row" id="blocks_output">
+  </div>
+</body>
+<script type="text/javascript" >
+  function getRandomColor() {
+    var letters = '0123456789ABCDEF';
+    var color = '#';
+    for (var i = 0; i < 6; i++) {
+      color += letters[Math.floor(Math.random() * 16)];
+    }
+    return color;
+  }
+  function run (){
+    var blocks = document.getElementById('blocks_input').value;
+    var output = document.getElementById('blocks_output');
+    if(isNaN(blocks)){
+      output.innerHTML = blocks + " is not a number <br/>";
+      return;
+    } else if (blocks < 0){
+      output.innerHTML = " Number should be more than 0  <br/>";
+      return;
+    } else if (blocks > 30) {
+      output.innerHTML = "  Мaximum numbers is 30 ";
+      return;
+    } else if (blocks != parseInt(blocks, 10)){
+      output.innerHTML = " Number should be integer <br/>";
+      return;
+    } else {
+      output.innerHTML = "";
+    }
+    var newDiv = document.createElement('table');
+    newDiv.className = 'new-class';
+    newDiv.id = 'new-id';
+    output.appendChild(newDiv);
+    for (var i = 1; i <= blocks; i++) {
+      var tr = document.createElement('tr');
+      tr.className = 'table-row';
+      newDiv.appendChild(tr);
+      for (var j = 1; j <= blocks; j++){
+        var td = document.createElement('td');
+        td.className = 'table-block';
+        tr.appendChild(td);
+        td.style.backgroundColor = getRandomColor();
+      }
+    }
+    if (document.getElementById('new-id')){
+      var oldDiv = document.getElementById('new-id');
+      oldDiv.parentNode.replaceChild(newDiv,oldDiv);
+    }
+  }
+</script>
+</html>
