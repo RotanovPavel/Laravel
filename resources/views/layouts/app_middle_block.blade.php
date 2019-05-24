@@ -2,7 +2,8 @@
     <nav class="navbar navbar-default" role="navigation">
         <div class="navbar-header v-align-m ">
 
-            <button type="button" id="btn-middle" class="navbar-toggle"  data-toggle="collapse" data-target=".navbar-ex2-collapse">
+            <button type="button" id="btn-middle" class="navbar-toggle" data-toggle="collapse"
+                    data-target=".navbar-ex2-collapse">
                 <span class="sr-only">Toggle navigation</span>
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
@@ -30,7 +31,7 @@
                     </ul>
                 </li>
 
-                <li class="dropdown"><a href="#" class="dropdown-toggle " data-toggle="dropdown" >Components</a>
+                <li class="dropdown"><a href="#" class="dropdown-toggle " data-toggle="dropdown">Components</a>
                     <ul class="dropdown-menu">
 
                         <li><a href="#">HDD</a></li>

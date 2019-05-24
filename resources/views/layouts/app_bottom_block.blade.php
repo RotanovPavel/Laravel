@@ -28,9 +28,12 @@
                     <p>Sign up:</p>
                     @csrf
                     <div class="form-group ">
-                        <input id="username" type="text" class="form-control @error('username') is-invalid @enderror " placeholder="Username" name="username" value="{{ old('username') }}"  autofocus>
+                        <input id="username" type="text" class="form-control @error('username') is-invalid @enderror "
+                               placeholder="Username" name="username" value="{{ old('username') }}" autofocus>
 
-                        <input id="password" type="password" class="form-control pass @error('password') is-invalid @enderror" placeholder="Password" name="password" required autocomplete="current-password">
+                        <input id="password" type="password"
+                               class="form-control pass @error('password') is-invalid @enderror" placeholder="Password"
+                               name="password" required autocomplete="current-password">
                         @error('password')
                         <span class="invalid-feedback invalid-box" role="alert">
                                         <strong>{{ $message }}</strong>

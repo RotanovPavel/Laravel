@@ -22,7 +22,9 @@
                 <h5> so turn the light out</h5>
             </a>
 
-            <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
+            <button class="navbar-toggle collapsed" type="button" data-toggle="collapse"
+                    data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                    aria-label="{{ __('Toggle navigation') }}">
                 <span class="sr-only">Toggle navigation</span>
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
@@ -41,12 +43,12 @@
             <ul class="nav navbar-nav navbar-right">
                 <!-- Authentication Links -->
                 @guest
-                    <li >
-                        <a  href="{{ route('login') }}">{{ __('Login') }}</a>
+                    <li>
+                        <a href="{{ route('login') }}">{{ __('Login') }}</a>
                     </li>
                     @if (Route::has('register'))
-                        <li >
-                            <a  href="{{ route('register') }}">{{ __('Create an account') }}</a>
+                        <li>
+                            <a href="{{ route('register') }}">{{ __('Create an account') }}</a>
                         </li>
                     @endif
                 @else
@@ -61,7 +63,8 @@
 
                         <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                             @csrf
-                        </form></li>
+                        </form>
+                    </li>
 
                     <li>
                         <button class="button "><i class="fa fa-shopping-basket"></i></button>
@@ -73,11 +76,11 @@
         </div>
     </nav>
 </div>
-        <main class="py-4">
+<main class="py-4">
 
-                @yield('content')
+    @yield('content')
 
-        </main>
+</main>
 
 </body>
 </html>

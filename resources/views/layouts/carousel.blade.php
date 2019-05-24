@@ -55,8 +55,6 @@
             </div>
 
 
-
-
             <div class="bottom-cont">
                 <div class="carousel-bottom-left ">
                     <!--<div class=" carousel slide v-align-m">-->
@@ -71,7 +69,7 @@
                 </div>
                 <div class="center-right-box">
                     <div class="carousel-bottom-center v-align-m v-align-s">
-                        <p class="v-align-m v-align-s" style="display: none"> </p>
+                        <p class="v-align-m v-align-s" style="display: none"></p>
                     </div>
                     <div class="carousel-bottom-right ">
                         <button class="btn v-align-m v-align-s"><p>purchase</p></button>

@@ -1,4 +1,3 @@
-
 <section class="footer-info">
     <div class="container">
         <div class="info-sed">
