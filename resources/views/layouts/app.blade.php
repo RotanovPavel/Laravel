@@ -52,25 +52,42 @@
                         </li>
                     @endif
                 @else
-                    <li><a href="#">wish list (0)</a></li>
-                    <li><a href="{{ route('home') }}">my account</a></li>
-                    <li><a href="#">shopping cart</a></li>
-                    <li><a class="dropdown-item" href="{{ route('logout') }}"
-                           onclick="event.preventDefault();
+                    <?php if(auth()->user()->isAdmin == 1){?>
+
+
+                        <li><a href="{{ route('home') }}">my account</a></li>
+                        <li><a href="{{url('admin/panel')}}">admin panel</a></li>
+                        <li><a class="dropdown-item" href="{{ route('logout') }}"
+                               onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
-                            {{ __('Logout') }}
-                        </a>
+                                {{ __('Logout') }}
+                            </a>
 
-                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                            @csrf
-                        </form>
-                    </li>
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                @csrf
+                            </form>
+                        </li>
 
-                    <li>
-                        <button class="button "><i class="fa fa-shopping-basket"></i></button>
-                        <div class="circle-button">0</div>
-                    </li>
+                    <?php } else { ?>
+                            <li><a href="#">wish list (0)</a></li>
+                            <li><a href="{{ route('home') }}">my account</a></li>
+                            <li><a href="#">shopping cart</a></li>
+                            <li><a class="dropdown-item" href="{{ route('logout') }}"
+                                   onclick="event.preventDefault();
+                                                             document.getElementById('logout-form').submit();">
+                                    {{ __('Logout') }}
+                                </a>
 
+                                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                    @csrf
+                                </form>
+                            </li>
+
+                            <li>
+                                <button class="button "><i class="fa fa-shopping-basket"></i></button>
+                                <div class="circle-button">0</div>
+                            </li>
+                        <?php } ?>
                 @endguest
             </ul>
         </div>
