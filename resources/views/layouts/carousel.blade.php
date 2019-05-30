@@ -8,7 +8,7 @@
             <div class="carousel-inner">
 
                 <div class="item active">
-                    <img src="{{ asset('img/product_sections/Gambino_940x355.png') }}" alt="" style="width:100%;">
+                    <img src="{{ asset('img/items/Gambino_940x355.png') }}" alt="" style="width:100%;">
                     <div class="carousel-caption">
 
                         <p>Childish Gambino - Camp Now Available for just $9.99</p>
@@ -16,7 +16,7 @@
                 </div>
 
                 <div class="item">
-                    <img src="{{ asset('img/product_sections/Gambino_940x355.png') }}" alt="" style="width:100%;">
+                    <img src="{{ asset('img/items/Gambino_940x355.png') }}" alt="" style="width:100%;">
                     <div class="carousel-caption">
 
                         <p>Childish Gambino - Camp Now Available for just $8.88</p>
@@ -24,7 +24,7 @@
                 </div>
 
                 <div class="item">
-                    <img src="{{ asset('img/product_sections/Gambino_940x355.png') }}" alt="" style="width:100%;">
+                    <img src="{{ asset('items') }}" alt="" style="width:100%;">
                     <div class="carousel-caption">
 
                         <p>Childish Gambino - Camp Now Available for just $7.77</p>
@@ -32,7 +32,7 @@
                 </div>
 
                 <div class="item">
-                    <img src="{{ asset('img/product_sections/Gambino_940x355.png') }}" alt="" style="width:100%;">
+                    <img src="{{ asset('img/items/Gambino_940x355.png') }}" alt="" style="width:100%;">
                     <div class="carousel-caption">
 
                         <p>Childish Gambino - Camp Now Available for just $6.66</p>
@@ -40,7 +40,7 @@
                 </div>
 
                 <div class="item">
-                    <img src="{{ asset('img/product_sections/Gambino_940x355.png') }}" alt="" style="width:100%;">
+                    <img src="{{ asset('img/items/Gambino_940x355.png') }}" alt="" style="width:100%;">
                     <div class="carousel-caption">
 
                         <p>Childish Gambino - Camp Now Available for just $5.55</p>

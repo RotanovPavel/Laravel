@@ -30,7 +30,7 @@
                                 <button class="btn-compare">Add to Wishlist</button>
                             </div>
                         @endguest
-                        <img src="{{ asset('img/product_sections/Kitty_205x178.png') }}"></div>
+                        <img src="{{ asset('img/items/Kitty_205x178.png') }}"></div>
                     <div class="prod-name">Mascot Kitty - White</div>
 
                     <div class="prod-info">
@@ -58,7 +58,7 @@
                             <button class="btn-compare">Add to Compare</button>
                             <button class="btn-compare">Add to Wishlist</button>
                         </div>
-                        <img src="{{ asset('img/product_sections/Bite_205x178.png') }}">
+                        <img src="{{ asset('img/items/Bite_205x178.png') }}">
                     </div>
                     <div class="prod-name">Bite Me</div>
                     <div class="prod-info">
@@ -80,7 +80,7 @@
                             <button class="btn-compare">Add to Compare</button>
                             <button class="btn-compare">Add to Wishlist</button>
                         </div>
-                        <img src="{{ asset('img/product_sections/Fella_205x178.png') }}">
+                        <img src="{{ asset('img/items/Fella_205x178.png') }}">
                     </div>
                     <div class="prod-name">Little Fella</div>
                     <div class="prod-info">
@@ -102,7 +102,7 @@
                             <button class="btn-compare">Add to Compare</button>
                             <button class="btn-compare">Add to Wishlist</button>
                         </div>
-                        <img src="{{ asset('img/product_sections/Cruise_205x178.png') }}">
+                        <img src="{{ asset('img/items/Cruise_205x178.png') }}">
                     </div>
                     <div class="prod-name">Astral Cruise</div>
                     <div class="prod-info">

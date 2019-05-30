@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
@@ -16,7 +18,6 @@ class UserController extends Controller
     {
         return redirect()->route('home');
 //        $users = User::all();
-//
 //        return view('users.index',['users' => $users]);
     }
 
@@ -64,7 +65,7 @@ class UserController extends Controller
     {
         $user = User::findOrFail($id);
 
-        return view('users.show', ['user' => $user]);
+        return view('users.edit', ['user' => $user]);
     }
 
     /**
@@ -78,7 +79,24 @@ class UserController extends Controller
     {
         $user = User::findOrFail($id);
 
-        $user->fill($request->all());
+        //below checking a change password
+
+        if (trim(Input::get('password')) == '') {
+            $request->offsetUnset('password');
+            $request->offsetUnset('password_confirmation');
+            $user->fill($request->all());
+
+
+        } else {
+            if (trim(Input::get('password')) == trim(Input::get('password_confirmation' ))) {
+                $user->password = Hash::make(trim(Input::get('password')));
+                $user->save();
+
+            } else {
+                return redirect()->back()->withErrors('Please confirm password');
+            }
+        }
+
 
         if (!$user->save()) {
             return redirect()->back()->withErrors('Update error');

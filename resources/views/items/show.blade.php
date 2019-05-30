@@ -1,11 +1,12 @@
 @extends('layouts.app')
 
 @section('content')
+    @include('admin/panel')
     <div class="container panel-box">
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
                 <div class="panel panel-default">
-                    <div class="panel-heading">Profile</div>
+                    <div class="panel-heading">Item</div>
                     <div class="panel-body">
 
                         @if($errors)
@@ -16,47 +17,38 @@
                             @endforeach
                         @endif
 
-                        <form method="post" action="{{route('users.update',['id' => $user->id])}}">
+                        <form method="post" action="{{route('items.update',['id' => $item->id])}}">
                             {{ csrf_field() }}
                             {{ method_field('patch') }}
                             <div class="form-group row">
                                 <label for="name" class="col-sm-2 col-form-label">Name</label>
                                 <div class="col-sm-10">
-                                    <input type="text" name="name" value="{{ $user->name }}"/>
+                                    {{ $item->name }}
                                 </div>
                             </div>
 
                             <div class="form-group row">
-                                <label for="name" class="col-sm-2 col-form-label">Username</label>
+                                <label for="name" class="col-sm-2 col-form-label">Price</label>
                                 <div class="col-sm-10">
-                                    <input type="text" name="username" value="{{ $user->username }}"/>
+                                    {{ $item->price }}$
                                 </div>
                             </div>
 
                             <div class="form-group row">
-                                <label for="name" class="col-sm-2 col-form-label">Email</label>
+                                <label for="name" class="col-sm-2 col-form-label">Relevance</label>
                                 <div class="col-sm-10">
-                                    <input type="email" name="email" value="{{ $user->email }}"/>
+                                    {{ $item->relevance }}
                                 </div>
                             </div>
 
                             <div class="form-group row">
-                                <label for="name" class="col-sm-2 col-form-label">Password</label>
+                                <label for="name" class="col-sm-2 col-form-label">Image</label>
                                 <div class="col-sm-10">
-                                    <input type="password" name="password" value="{{ $user->password }}"/>
+                                    {{ $item->image }}
                                 </div>
                             </div>
-
-                            <div class=" form-group row">
-                                <label for="name" class="col-sm-2 col-form-label">Confirm</label>
-                                <div class="col-sm-10">
-                                    <input type="password" name="password_confirmation"/>
-                                </div>
-                            </div>
-
-                            <button class="btn btn-default" type="submit">Send</button>
                         </form>
-
+                        <a class="btn btn-default" href="{{url('items')}}">Items</a>
                     </div>
                 </div>
             </div>

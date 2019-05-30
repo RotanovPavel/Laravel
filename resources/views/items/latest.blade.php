@@ -27,7 +27,7 @@
                             <button class="btn-compare">Add to Compare</button>
                             <button class="btn-compare">Add to Wishlist</button>
                         </div>
-                        <img src="{{ asset('img/product_sections/Bag_205x178.png') }}"></div>
+                        <img src="{{ asset('img/items/Bag_205x178.png') }}"></div>
                     <div class="prod-name">Mascot Kitty - White</div>
                     <div class="prod-info">
                         <button class="btn"><p>ADD TO CARD</p></button>
@@ -47,7 +47,7 @@
                             <button class="btn-compare">Add to Compare</button>
                             <button class="btn-compare">Add to Wishlist</button>
                         </div>
-                        <img src="{{ asset('img/product_sections/Read_205x178.png') }}">
+                        <img src="{{ asset('img/items/Read_205x178.png') }}">
                     </div>
                     <div class="prod-name">Bite Me</div>
                     <div class="prod-info">
@@ -68,7 +68,7 @@
                             <button class="btn-compare">Add to Compare</button>
                             <button class="btn-compare">Add to Wishlist</button>
                         </div>
-                        <img src="{{ asset('img/product_sections/Carter_205x178.png') }}">
+                        <img src="{{ asset('img/items/Carter_205x178.png') }}">
                     </div>
                     <div class="prod-name">Little Fella</div>
                     <div class="prod-info">
@@ -89,7 +89,7 @@
                             <button class="btn-compare">Add to Compare</button>
                             <button class="btn-compare">Add to Wishlist</button>
                         </div>
-                        <img src="{{ asset('img/product_sections/Onesie_205x178.png') }}">
+                        <img src="{{ asset('img/items/Onesie_205x178.png') }}">
                     </div>
                     <div class="prod-name">Astral Cruise</div>
                     <div class="prod-info">
