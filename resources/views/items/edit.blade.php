@@ -17,7 +17,7 @@
                             @endforeach
                         @endif
 
-                        <form method="post" action="{{route('items.update',['id' => $item->id])}}">
+                        <form method="post" action="{{route('items.update',['id' => $item->id])}}" enctype="multipart/form-data">
                             {{ csrf_field() }}
                             {{ method_field('patch') }}
                             <div class="form-group row">
@@ -51,10 +51,12 @@
                             </div>
 
                             <div class="form-group row">
-                                <label for="name" class="col-sm-2 col-form-label">Image</label>
-                                <div class="col-sm-10">
-                                    <input type="text" name="image" value="{{ $item->image }}"/>
+                                <label for="image" class="col-sm-2 col-form-label">{{ __('Image') }}</label>
+
+                                <div class="col-md-6">
+                                    <input type="file" name="image">
                                 </div>
+
                             </div>
 
                             <div class="form-group row">

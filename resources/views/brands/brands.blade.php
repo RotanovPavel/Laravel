@@ -19,20 +19,11 @@
             <div class="container">
                 <div class="swiper-container">
                     <div class="swiper-wrapper hover01">
-                        <div class="swiper-slide"><a href="#"><img src="{{ asset('img/brands/apple-small.png') }}"
-                                                                   class="img-responsive"></a></div>
+                        @foreach($brands as $brand)
 
-                        <div class="swiper-slide"><a href="#"><img src="{{ asset('img/brands/palm.png') }}"
-                                                                   class="img-responsive"></a></div>
-
-                        <div class="swiper-slide"><a href="#"><img src="{{ asset('img/brands/palm.png') }}"
-                                                                   class="img-responsive"></a></div>
-
-                        <div class="swiper-slide"><a href="#"><img src="{{ asset('img/brands/boss.png') }}"
-                                                                   class="img-responsive"></a></div>
-
-                        <div class="swiper-slide"><a href="#"><img src="{{ asset('img/brands/monkey.png') }}"
-                                                                   class="img-responsive"></a></div>
+                            <div class="swiper-slide"><a href="{{ route('brands.itemList', ['id' => $brand->id ])}}"><img alt="{{$brand->name}}" src="{{ asset('img/brands/'.$brand->image) }}"
+                                                                       class="img-responsive"></a></div>
+                        @endforeach
                     </div>
 
                     <div class="swiper-button-next"><i class="fa fa-chevron-right" aria-hidden="true"></i></div>

@@ -18,20 +18,18 @@
                     <table class="table table-striped">
                         <tr>
                             <td class="info">Name:</td>
-                            <td class="info">Image:</td>
                             <td class="info">Relevance:</td>
                             <td class="info">Price:</td>
-                            <td class="info">ID:</td>
+                            <td class="info">Brand:</td>
                             <td class="info"></td>
                             <td class="info"></td>
                         </tr>
                         @foreach($query as $item)
                             <tr>
                                 <td>{{$item->name}}</td>
-                                <td>{{$item->image}}</td>
                                 <td>{{$item->relevance}}</td>
                                 <td>{{$item->price}}</td>
-                                <td>{{$item->id}}</td>
+                                <td>{{$item->brand_name}}</td>
                                 <td>
                                     <a class="btn btn-info"
                                        href="{{ route('items.edit', ['id' => $item->id ])}}">Edit</a>

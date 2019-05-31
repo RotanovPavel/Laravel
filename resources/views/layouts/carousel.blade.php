@@ -24,7 +24,7 @@
                 </div>
 
                 <div class="item">
-                    <img src="{{ asset('items') }}" alt="" style="width:100%;">
+                    <img src="{{ asset('img/items/Gambino_940x355.png') }}" alt="" style="width:100%;">
                     <div class="carousel-caption">
 
                         <p>Childish Gambino - Camp Now Available for just $7.77</p>

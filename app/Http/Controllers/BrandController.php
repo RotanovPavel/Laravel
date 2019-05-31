@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use DB;
 use Illuminate\Http\Request;
 use App\Brand;
 
@@ -43,12 +44,12 @@ class BrandController extends Controller
 
         $imgName = $request->file('image')->getClientOriginalName(); //записываем название загружаемого файла
         $unique_name = md5($imgName. time()); //генерируем уникальное имя
-        $imgName = $unique_name . $imgName;
+        $imgName = $unique_name ."_". $imgName;
         if($request->isMethod('post')){
 
             if($request->hasFile('image')) {
                 $file = $request->file('image');
-                $file->move(public_path() . '/img/items',$imgName);
+                $file->move(public_path() . '/img/brands',$imgName);
             }
         }
 
@@ -68,6 +69,7 @@ class BrandController extends Controller
      */
     public function show($id)
     {
+
         $brand = Brand::findOrFail($id);
 
         return view('brands.show',['brand' => $brand]);
@@ -97,7 +99,27 @@ class BrandController extends Controller
     {
         $brand = Brand::findOrFail($id);
 
-        $brand->update($request->all());
+        if($request->has('image') ) { // проверяем на наличие значения 'image' из запроса
+            $imgName = $request->file('image')->getClientOriginalName(); //записываем название загружаемого файла
+            $unique_name = md5($imgName . time()); //генерируем уникальное имя
+            $imgName = $unique_name . "_" . $imgName;
+            if ($request->isMethod('post')) {
+
+                if ($request->hasFile('image')) {
+                    $file = $request->file('image');
+                    $file->move(public_path() . '/img/items', $imgName);
+
+                    $this->validate($request, [
+                        'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+                    ]);
+                    $brand->image = $imgName;
+                }
+            }
+        }
+
+
+        $brand->name = $request->get('name');
+        $brand->update();
 
         return redirect()->route('brands.show', $brand);
     }
@@ -115,5 +137,15 @@ class BrandController extends Controller
         $brand->delete();
 
         return redirect()->route('brands.index');
+    }
+
+
+    public function itemList($id)
+    {
+
+        $brand = Brand::findOrFail($id);
+        $items = DB::table('items')->where('brand_id', '=', $id)->get();
+        return view('brands.itemList',compact('brand','items'));
+
     }
 }

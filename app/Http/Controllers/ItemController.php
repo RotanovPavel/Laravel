@@ -43,7 +43,29 @@ class ItemController extends Controller
      */
     public function store(Request $request)
     {
-        $item = Item::create($request->all());
+        $this->validate($request, [
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+        ]);
+
+        $imgName = $request->file('image')->getClientOriginalName(); //записываем название загружаемого файла
+        $unique_name = md5($imgName. time()); //генерируем уникальное имя
+        $imgName = $unique_name ."_". $imgName;
+        if($request->isMethod('post')){
+
+            if($request->hasFile('image')) {
+                $file = $request->file('image');
+                $file->move(public_path() . '/img/items',$imgName);
+            }
+        }
+
+        $item = new Item();
+        $item->name = $request->get('name');
+        $item->price = $request->get('price');
+        $item->relevance = $request->get('relevance');
+        $item->brand_id = $request->get('brand_id');
+        $item->image = $imgName;
+        $item->save();
+
         return redirect()->route('items.show', $item);
     }
 
@@ -85,7 +107,31 @@ class ItemController extends Controller
     {
         $item = Item::findOrFail($id);
 
-        $item->update($request->all());
+
+        if($request->has('image') ) {  // проверяем на наличие значения 'image' из запроса
+            $imgName = $request->file('image')->getClientOriginalName(); //записываем название загружаемого файла
+            $unique_name = md5($imgName . time()); //генерируем уникальное имя
+            $imgName = $unique_name . "_" . $imgName;
+            if ($request->isMethod('post')) {
+
+                if ($request->hasFile('image')) {
+                    $file = $request->file('image');
+                    $file->move(public_path() . '/img/items', $imgName);
+
+                    $this->validate($request, [
+                        'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+                    ]);
+                    $item->image = $imgName;
+                }
+            }
+        }
+
+        $item->name = $request->get('name');
+        $item->price = $request->get('price');
+        $item->relevance = $request->get('relevance');
+        $item->brand_id = $request->get('brand_id');
+
+        $item->update();
 
         return redirect()->route('items.show', $item);
     }
@@ -104,4 +150,5 @@ class ItemController extends Controller
 
         return redirect()->route('items.index');
     }
+
 }

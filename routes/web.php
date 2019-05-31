@@ -11,8 +11,13 @@
 |
 */
 
+use App\Brand;
+
 Route::get('/', function () {
-    return view('index');
+    $brands = Brand::all();
+    $featuredItems = DB::table('items')->where('relevance', '=', 'featured')->get();
+    $latestItems = DB::table('items')->where('relevance', '=', 'latest')->get();
+    return view('index',compact('brands', 'featuredItems', 'latestItems'));
 });
 
 Auth::routes();
@@ -20,5 +25,8 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('admin', 'HomeController@admin')->middleware('admin');
 Route::resource('brands', 'BrandController');
+
 Route::resource('items', 'ItemController');
 Route::resource('users', 'UserController');
+
+Route::get('itemList/{id}', 'BrandController@itemList')->name('brands.itemList');
