@@ -9,11 +9,17 @@
 @import 'sections/footer_info.less';
 @import 'sections/footer_contacts.less';
 @import 'sections/footer_rights.less';
+@import 'sections/test.less';
 
 
 body {
     button:focus {
         outline: 0;
+    }
+
+    :active, :hover, :focus {
+        outline: 0;
+        outline-offset: 0;
     }
 }
 
@@ -604,4 +610,12 @@ body {
 
 .panel-box {
     margin-top: 25px;
+}
+
+.img-edit {
+    width: min-content;
+    border: solid 1px;
+    border-color: gray;
+    border-radius: 2px;
+    margin-bottom: 15px;
 }

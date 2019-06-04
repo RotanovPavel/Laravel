@@ -5,7 +5,7 @@
  */
 
 require('./bootstrap');
-
+require('./test');
 //window.Vue = require('vue');
 
 /**
@@ -44,11 +44,8 @@ $('#btn-middle').click(function () {
 });
 
 
-
-
 $('#myCarousel').on('slide.bs.carousel', function () {
-    console.log('slider');
-    var act = $(".active p").text();
+    let act = $(".active p").text();
     $('.carousel-bottom-center p').text(act);
     $('.carousel-bottom-center p').hide();
     $('.carousel-bottom-center p').fadeToggle(1500);
@@ -56,8 +53,7 @@ $('#myCarousel').on('slide.bs.carousel', function () {
 
 
 $(document).ready(function () {
-    console.log('swiper');
-    var swiper = new Swiper('.swiper-container', {
+    let swiper = new Swiper('.swiper-container', {
         slidesPerView: 4,
         spaceBetween: 0,
         loop: true,
@@ -78,3 +74,19 @@ $(document).ready(function () {
     });
 
 });
+
+$("#btn-feature").click(function () {
+    $(".iconToggle").toggleClass("fa-plus");
+    $(".iconToggle").toggleClass("fa-minus");
+    $('#latest').slideToggle('slow');
+    $("#feature").slideToggle('slow');
+});
+$("#btn-latest").click(function () {
+    $(".iconToggle").toggleClass("fa-plus");
+    $(".iconToggle").toggleClass("fa-minus");
+    $('#latest').slideToggle('slow');
+    $("#feature").slideToggle('slow');
+});
+
+
+

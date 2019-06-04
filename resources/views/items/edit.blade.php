@@ -20,6 +20,10 @@
                         <form method="post" action="{{route('items.update',['id' => $item->id])}}" enctype="multipart/form-data">
                             {{ csrf_field() }}
                             {{ method_field('patch') }}
+                            <div class="img-edit">
+                                <img alt="{{$item->name}}" src="{{ asset('img/items/'.$item->image) }}">
+                            </div>
+
                             <div class="form-group row">
                                 <label for="name" class="col-sm-2 col-form-label">Name</label>
                                 <div class="col-sm-10">

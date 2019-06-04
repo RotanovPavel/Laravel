@@ -8,6 +8,8 @@
                     <a href="{{url('brands')}}">BRANDS</a>
                     |
                     <a href="{{url('items')}}">ITEMS</a>
+                    |
+                    <a href="{{url('discount_items')}}">DISCOUNT ITEMS</a>
                 </div>
             </div>
         </div>

@@ -23,10 +23,13 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
-Route::get('admin', 'HomeController@admin')->middleware('admin');
-Route::resource('brands', 'BrandController');
-
-Route::resource('items', 'ItemController');
-Route::resource('users', 'UserController');
+Route::get('admin', 'HomeController@admin')->middleware(['admin','auth']);
+Route::resource('brands', 'BrandController')->middleware(['admin','auth']);
+Route::resource('items', 'ItemController')->middleware(['admin','auth']);
+Route::resource('users', 'UserController')->middleware('auth');
+Route::resource('discount_items', 'DiscountItemController')->middleware(['admin','auth']);
 
 Route::get('itemList/{id}', 'BrandController@itemList')->name('brands.itemList');
+Route::get('/test', function (){
+    return view('test');
+});

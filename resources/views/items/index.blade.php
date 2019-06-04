@@ -21,6 +21,7 @@
                             <td class="info">Relevance:</td>
                             <td class="info">Price:</td>
                             <td class="info">Brand:</td>
+                            <td class="info">Image:</td>
                             <td class="info"></td>
                             <td class="info"></td>
                         </tr>
@@ -30,6 +31,9 @@
                                 <td>{{$item->relevance}}</td>
                                 <td>{{$item->price}}</td>
                                 <td>{{$item->brand_name}}</td>
+                                <td>
+                                    <img alt="{{$item->name}}" src="{{ asset('img/items/small_items/'.$item->image) }}">
+                                </td>
                                 <td>
                                     <a class="btn btn-info"
                                        href="{{ route('items.edit', ['id' => $item->id ])}}">Edit</a>

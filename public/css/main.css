@@ -9384,6 +9384,9 @@ button.close {
   -webkit-transform: scale(1.2);
   transform: scale(1.2);
 }
+.latest #latest {
+  display: none;
+}
 .latest .container {
   width: 940px;
   margin: 50px auto 0;
@@ -9811,8 +9814,52 @@ button.close {
   display: inline-block;
   vertical-align: middle;
 }
+.MultiCarousel {
+  float: left;
+  overflow: hidden;
+  padding: 15px;
+  width: 100%;
+  position: relative;
+}
+.MultiCarousel .MultiCarousel-inner {
+  transition: 1s ease all;
+  float: left;
+}
+.MultiCarousel .MultiCarousel-inner .item {
+  float: left;
+}
+.MultiCarousel .MultiCarousel-inner .item > div {
+  text-align: center;
+  padding: 10px;
+  margin: 10px;
+  background: #f1f1f1;
+  color: #666;
+}
+.MultiCarousel .leftLst,
+.MultiCarousel .rightLst {
+  position: absolute;
+  border-radius: 50%;
+  top: calc(50% - 20px);
+}
+.MultiCarousel .leftLst {
+  left: 0;
+}
+.MultiCarousel .rightLst {
+  right: 0;
+}
+.MultiCarousel .leftLst.over,
+.MultiCarousel .rightLst.over {
+  pointer-events: none;
+  background: #ccc;
+}
 body button:focus {
   outline: 0;
+}
+body :active,
+body :hover,
+body :focus {
+  outline: 0;
+  outline-offset: 0;
 }
 .top-block {
   background: linear-gradient(to bottom, #f9572d 70%, #e93315);
@@ -10354,4 +10401,13 @@ body button:focus {
 }
 .panel-box {
   margin-top: 25px;
+}
+.img-edit {
+  width: -webkit-min-content;
+  width: -moz-min-content;
+  width: min-content;
+  border: solid 1px;
+  border-color: gray;
+  border-radius: 2px;
+  margin-bottom: 15px;
 }

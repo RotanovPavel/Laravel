@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Item;
 use App\Brand;
 use DB;
+use File;
+use Intervention\Image\ImageManagerStatic as Image;
 
 class ItemController extends Controller
 {
@@ -50,11 +52,16 @@ class ItemController extends Controller
         $imgName = $request->file('image')->getClientOriginalName(); //записываем название загружаемого файла
         $unique_name = md5($imgName. time()); //генерируем уникальное имя
         $imgName = $unique_name ."_". $imgName;
-        if($request->isMethod('post')){
 
+        if($request->isMethod('post')){
             if($request->hasFile('image')) {
                 $file = $request->file('image');
-                $file->move(public_path() . '/img/items',$imgName);
+                $image_resize = Image::make($file->getRealPath());
+                $small_image_resize = Image::make($file->getRealPath());
+                $image_resize->resize(205, 178);
+                $small_image_resize->resize(50, 43);
+                $image_resize->save(public_path('/img/items/'.$imgName));
+                $small_image_resize->save(public_path('/img/items/small_items/'.$imgName));
             }
         }
 
@@ -112,20 +119,40 @@ class ItemController extends Controller
             $imgName = $request->file('image')->getClientOriginalName(); //записываем название загружаемого файла
             $unique_name = md5($imgName . time()); //генерируем уникальное имя
             $imgName = $unique_name . "_" . $imgName;
-            if ($request->isMethod('post')) {
+            if ($request->isMethod('patch')) {
 
                 if ($request->hasFile('image')) {
-                    $file = $request->file('image');
-                    $file->move(public_path() . '/img/items', $imgName);
 
                     $this->validate($request, [
                         'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
                     ]);
-                    $item->image = $imgName;
+
+                    $file = $request->file('image');
+                    $image_resize = Image::make($file->getRealPath());
+                    $small_image_resize = Image::make($file->getRealPath());
+                    $image_resize->resize(205, 178);
+                    $small_image_resize->resize(50, 43);
+                    $image_resize->save(public_path('/img/items/'.$imgName));
+                    $small_image_resize->save(public_path('/img/items/small_items/'.$imgName));
+
+                    $image_path = public_path("img/items/{$item->image}");
+                    $small_image_path = public_path("img/items/small_items/{$item->image}");
+
+                    if (File::exists($image_path)) {
+                        if (File::exists($small_image_path)){
+                            File::delete($image_path);
+                            File::delete($small_image_path);
+                        }
+                    } else {
+                        return redirect()->back()->withErrors('Update error');
+                    }
+
+
+
                 }
             }
         }
-
+        $item->image = $imgName;
         $item->name = $request->get('name');
         $item->price = $request->get('price');
         $item->relevance = $request->get('relevance');
@@ -145,6 +172,17 @@ class ItemController extends Controller
     public function destroy($id)
     {
         $item = Item::findOrFail($id);
+        $image_path = public_path("img/items/{$item->image}");
+        $small_image_path = public_path("img/items/small_items/{$item->image}");
+
+        if (File::exists($image_path)) {
+            if (File::exists($small_image_path)){
+                File::delete($image_path);
+                File::delete($small_image_path);
+            }
+        } else {
+            return redirect()->back()->withErrors('Delete error');
+        }
 
         $item->delete();
 

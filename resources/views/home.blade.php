@@ -18,6 +18,7 @@
                     </div>
                     <div class="panel-body">
                         <a class="btn btn-info" href="{{ route('users.show', ['id' => Auth::user()->id ])}}">Edit</a>
+                        <a class="btn btn-success" href="{{ url('/')}}">General Page</a>
                     </div>
                 </div>
             </div>

@@ -52,7 +52,7 @@ class UserController extends Controller
     {
        $user = User::findOrFail($id);
 
-       return view('users.show', ['user' => $user]);
+       return view('users.edit', ['user' => $user]);
     }
 
     /**
@@ -78,8 +78,11 @@ class UserController extends Controller
     public function update(Request $request, $id)
     {
         $user = User::findOrFail($id);
-
+        $data = $request->all();
         //below checking a change password
+
+
+
 
         if (trim(Input::get('password')) == '') {
             $request->offsetUnset('password');
@@ -88,6 +91,12 @@ class UserController extends Controller
 
 
         } else {
+
+            if(!Hash::check($data['old_password'], $user->password)){
+
+                return back()->withErrors('Please enter old password');
+            }
+
             if (trim(Input::get('password')) == trim(Input::get('password_confirmation' ))) {
                 $user->password = Hash::make(trim(Input::get('password')));
                 $user->save();
@@ -102,7 +111,7 @@ class UserController extends Controller
             return redirect()->back()->withErrors('Update error');
         }
 
-        return redirect()->route('home');
+        return redirect()->back()->withSuccess('Changes were successfully made.');
     }
 
     /**

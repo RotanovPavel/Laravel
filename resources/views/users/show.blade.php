@@ -43,7 +43,7 @@
                             <div class="form-group row">
                                 <label for="name" class="col-sm-2 col-form-label">Password</label>
                                 <div class="col-sm-10">
-                                    <input type="password" name="password" value="{{ $user->password }}"/>
+                                    <input type="password" name="password" value=""/>
                                     </div>
                                 </div>
 

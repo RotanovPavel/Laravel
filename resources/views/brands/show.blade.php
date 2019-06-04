@@ -20,6 +20,8 @@
                         <form method="post" action="{{route('brands.update',['id' => $brand->id])}}">
                             {{ csrf_field() }}
                             {{ method_field('patch') }}
+                            <img alt="{{$brand->name}}" src="{{ asset('img/brands/'.$brand->image) }}"
+                                 class="img-responsive">
                             <div class="form-group row">
                                 <label for="name" class="col-sm-2 col-form-label">Name</label>
                                 <div class="col-sm-10">

@@ -30589,7 +30589,9 @@ module.exports = function(module) {
  * includes Vue and other libraries. It is a great starting point when
  * building robust, powerful web applications using Vue and Laravel.
  */
-__webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js"); //window.Vue = require('vue');
+__webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
+
+__webpack_require__(/*! ./test */ "./resources/js/test.js"); //window.Vue = require('vue');
 
 /**
  * The following block of code may be used to automatically register your
@@ -30623,14 +30625,12 @@ $('#btn-middle').click(function () {
   }
 });
 $('#myCarousel').on('slide.bs.carousel', function () {
-  console.log('slider');
   var act = $(".active p").text();
   $('.carousel-bottom-center p').text(act);
   $('.carousel-bottom-center p').hide();
   $('.carousel-bottom-center p').fadeToggle(1500);
 });
 $(document).ready(function () {
-  console.log('swiper');
   var swiper = new Swiper('.swiper-container', {
     slidesPerView: 4,
     spaceBetween: 0,
@@ -30650,6 +30650,18 @@ $(document).ready(function () {
       prevEl: '.swiper-button-prev'
     }
   });
+});
+$("#btn-feature").click(function () {
+  $(".iconToggle").toggleClass("fa-plus");
+  $(".iconToggle").toggleClass("fa-minus");
+  $('#latest').slideToggle('slow');
+  $("#feature").slideToggle('slow');
+});
+$("#btn-latest").click(function () {
+  $(".iconToggle").toggleClass("fa-plus");
+  $(".iconToggle").toggleClass("fa-minus");
+  $('#latest').slideToggle('slow');
+  $("#feature").slideToggle('slow');
 });
 
 /***/ }),
@@ -30710,6 +30722,109 @@ try {
 //     cluster: process.env.MIX_PUSHER_APP_CLUSTER,
 //     encrypted: true
 // });
+
+/***/ }),
+
+/***/ "./resources/js/test.js":
+/*!******************************!*\
+  !*** ./resources/js/test.js ***!
+  \******************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+$(document).ready(function () {
+  var itemsMainDiv = '.MultiCarousel';
+  var itemsDiv = '.MultiCarousel-inner';
+  var itemWidth = "";
+  $('.leftLst, .rightLst').click(function () {
+    var condition = $(this).hasClass("leftLst");
+    if (condition) click(0, this);else click(1, this);
+  });
+  ResCarouselSize();
+  $(window).resize(function () {
+    ResCarouselSize();
+  }); //this function define the size of the items
+
+  function ResCarouselSize() {
+    var incno = 0;
+    var dataItems = "data-items";
+    var itemClass = '.item';
+    var id = 0;
+    var btnParentSb = '';
+    var itemsSplit = '';
+    var sampwidth = $(itemsMainDiv).width();
+    var bodyWidth = $('body').width();
+    $(itemsDiv).each(function () {
+      id = id + 1;
+      var itemNumbers = $(this).find(itemClass).length;
+      btnParentSb = $(this).parent().attr(dataItems);
+      itemsSplit = btnParentSb.split(',');
+      $(this).parent().attr("id", "MultiCarousel" + id);
+
+      if (bodyWidth >= 1200) {
+        incno = itemsSplit[3];
+        itemWidth = sampwidth / incno;
+      } else if (bodyWidth >= 992) {
+        incno = itemsSplit[2];
+        itemWidth = sampwidth / incno;
+      } else if (bodyWidth >= 768) {
+        incno = itemsSplit[1];
+        itemWidth = sampwidth / incno;
+      } else {
+        incno = itemsSplit[0];
+        itemWidth = sampwidth / incno;
+      }
+
+      $(this).css({
+        'transform': 'translateX(0px)',
+        'width': itemWidth * itemNumbers
+      });
+      $(this).find(itemClass).each(function () {
+        $(this).outerWidth(itemWidth);
+      });
+      $(".leftLst").addClass("over");
+      $(".rightLst").removeClass("over");
+    });
+  } //this function used to move the items
+
+
+  function ResCarousel(e, el, s) {
+    var leftBtn = '.leftLst';
+    var rightBtn = '.rightLst';
+    var translateXval = '';
+    var divStyle = $(el + ' ' + itemsDiv).css('transform');
+    var values = divStyle.match(/-?[\d\.]+/g);
+    var xds = Math.abs(values[4]);
+
+    if (e == 0) {
+      translateXval = parseInt(xds) - parseInt(itemWidth * s);
+      $(el + ' ' + rightBtn).removeClass("over");
+
+      if (translateXval <= itemWidth / 2) {
+        translateXval = 0;
+        $(el + ' ' + leftBtn).addClass("over");
+      }
+    } else if (e == 1) {
+      var itemsCondition = $(el).find(itemsDiv).width() - $(el).width();
+      translateXval = parseInt(xds) + parseInt(itemWidth * s);
+      $(el + ' ' + leftBtn).removeClass("over");
+
+      if (translateXval >= itemsCondition - itemWidth / 2) {
+        translateXval = itemsCondition;
+        $(el + ' ' + rightBtn).addClass("over");
+      }
+    }
+
+    $(el + ' ' + itemsDiv).css('transform', 'translateX(' + -translateXval + 'px)');
+  } //It is used to get some elements from btn
+
+
+  function click(ell, ee) {
+    var Parent = "#" + $(ee).parent().attr("id");
+    var slide = $(Parent).attr("data-slide");
+    ResCarousel(ell, Parent, slide);
+  }
+});
 
 /***/ }),
 

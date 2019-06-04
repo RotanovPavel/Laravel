@@ -14,12 +14,12 @@
             </div>
 
             <div class="feature-top-right">
-                <button id="btn-feature" class="button" data-toggle="collapse" data-target="#feature"><i
-                        class="fa fa-minus" aria-hidden="true"></i></button>
+                <button id="btn-feature" class="button" data-target="#feature"><i
+                        class="iconToggle fa fa-minus" aria-hidden="true"></i></button>
             </div>
         </div>
 
-        <div id="feature" class="feature-bottom  collapse in">
+        <div id="feature" class="feature-bottom ">
             @foreach($featuredItems as $item)
 
                 @php

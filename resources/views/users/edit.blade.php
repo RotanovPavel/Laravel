@@ -16,6 +16,12 @@
                             @endforeach
                         @endif
 
+                        @if(session('success'))
+                                <div class="alert alert-success" role="alert">
+                                    {{session('success')}}
+                                </div>
+                        @endif
+
                         <form method="post" action="{{route('users.update',['id' => $user->id])}}">
                             {{ csrf_field() }}
                             {{ method_field('patch') }}
@@ -41,9 +47,16 @@
                             </div>
 
                             <div class="form-group row">
-                                <label for="name" class="col-sm-2 col-form-label">Password</label>
+                                <label for="name" class="col-sm-2 col-form-label">Old Password</label>
                                 <div class="col-sm-10">
-                                    <input type="password" name="password" value="{{ $user->password }}"/>
+                                    <input type="password" name="old_password" value=""/>
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label for="name" class="col-sm-2 col-form-label">New Password</label>
+                                <div class="col-sm-10">
+                                    <input type="password" name="password" value=""/>
                                 </div>
                             </div>
 
@@ -55,6 +68,7 @@
                             </div>
 
                             <button class="btn btn-default" type="submit">Send</button>
+                            <a class="btn btn-info" href="{{ url('/home')}}">Home</a>
                         </form>
 
                     </div>

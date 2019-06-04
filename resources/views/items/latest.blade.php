@@ -15,11 +15,11 @@
             </div>
 
             <div class="latest-top-right">
-                <button id="btn-latest" class="button" data-toggle="collapse" data-target="#latest"><i
-                        class="fa fa-minus" aria-hidden="true"></i></button>
+                <button id="btn-latest" class="button" data-target="#latest"><i
+                        class="iconToggle fa fa-plus" aria-hidden="true"></i></button>
             </div>
         </div>
-        <div id="feature" class="latest-bottom  collapse in">
+        <div id="latest" class="latest-bottom">
             @foreach($latestItems as $item)
 
                 @php

@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use DB;
+use File;
 use Illuminate\Http\Request;
 use App\Brand;
+use Intervention\Image\ImageManagerStatic as Image;
 
 class BrandController extends Controller
 {
@@ -49,7 +51,12 @@ class BrandController extends Controller
 
             if($request->hasFile('image')) {
                 $file = $request->file('image');
-                $file->move(public_path() . '/img/brands',$imgName);
+                $image_resize = Image::make($file->getRealPath());
+                $small_image_resize = Image::make($file->getRealPath());
+                $image_resize->resize(82, 82);
+                $small_image_resize->resize(50, 50);
+                $image_resize->save(public_path('/img/brands/'.$imgName));
+                $small_image_resize->save(public_path('/img/brands/small_brands/'.$imgName));
             }
         }
 
@@ -69,9 +76,7 @@ class BrandController extends Controller
      */
     public function show($id)
     {
-
         $brand = Brand::findOrFail($id);
-
         return view('brands.show',['brand' => $brand]);
     }
 
@@ -100,24 +105,47 @@ class BrandController extends Controller
         $brand = Brand::findOrFail($id);
 
         if($request->has('image') ) { // проверяем на наличие значения 'image' из запроса
+
             $imgName = $request->file('image')->getClientOriginalName(); //записываем название загружаемого файла
             $unique_name = md5($imgName . time()); //генерируем уникальное имя
             $imgName = $unique_name . "_" . $imgName;
-            if ($request->isMethod('post')) {
+            if ($request->isMethod('patch')) {
 
                 if ($request->hasFile('image')) {
-                    $file = $request->file('image');
-                    $file->move(public_path() . '/img/items', $imgName);
 
                     $this->validate($request, [
                         'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
                     ]);
-                    $brand->image = $imgName;
+
+                    $file = $request->file('image');
+                    $image_resize = Image::make($file->getRealPath());
+                    $small_image_resize = Image::make($file->getRealPath());
+                    $image_resize->resize(82, 82);
+                    $small_image_resize->resize(50, 50);
+                    $image_resize->save(public_path('/img/brands/'.$imgName));
+                    $small_image_resize->save(public_path('/img/brands/small_brands/'.$imgName));
+
+
+
+                    $image_path = public_path("img/brands/{$brand->image}");
+                    $small_image_path = public_path("img/brands/small_brands/{$brand->image}");
+
+                    if (File::exists($image_path)) {
+
+                        if (File::exists($small_image_path)){
+
+                            File::delete($image_path);
+                            File::delete($small_image_path);
+                        }
+
+                    } else {
+                        return redirect()->back()->withErrors('Update error');
+                    }
                 }
             }
         }
 
-
+        $brand->image = $imgName;
         $brand->name = $request->get('name');
         $brand->update();
 
@@ -134,9 +162,22 @@ class BrandController extends Controller
     {
         $brand = Brand::findOrFail($id);
 
+        //delete brand images
+        $image_path = public_path("img/brands/{$brand->image}");
+        $small_image_path = public_path("img/brands/small_brands/{$brand->image}");
+
+        if (File::exists($image_path)) {
+            if (File::exists($small_image_path)){
+                File::delete($image_path);
+                File::delete($small_image_path);
+            }
+        } else {
+            return redirect()->back()->withErrors('Delete error');
+        }
+
         $brand->delete();
 
-        return redirect()->route('brands.index');
+        return redirect()->route('brands.index')->withSuccess('Success Deleted');
     }
 
 
