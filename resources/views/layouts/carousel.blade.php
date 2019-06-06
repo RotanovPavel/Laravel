@@ -6,46 +6,21 @@
 
             <!-- Wrapper for slides -->
             <div class="carousel-inner">
-
-                <div class="item active">
-                    <img src="{{ asset('img/items/Gambino_940x355.png') }}" alt="" style="width:100%;">
+                @php ($count = 0)
+                @foreach($discount_items as $discount)
+                <div class="item {{$count == 0 ? 'active' : ''}}">
+                    <img src="{{ asset('img/discount_items/'.$discount->image) }}" alt="{{$discount->name}}" style="width:100%;">
                     <div class="carousel-caption">
 
-                        <p>Childish Gambino - Camp Now Available for just $9.99</p>
+                        <p>{{$discount->name}} - Camp Now Available for just ${{$discount->price}}</p>
                     </div>
                 </div>
+                    @php ($count += 1)
+                @endforeach
 
-                <div class="item">
-                    <img src="{{ asset('img/items/Gambino_940x355.png') }}" alt="" style="width:100%;">
-                    <div class="carousel-caption">
 
-                        <p>Childish Gambino - Camp Now Available for just $8.88</p>
-                    </div>
-                </div>
 
-                <div class="item">
-                    <img src="{{ asset('img/items/Gambino_940x355.png') }}" alt="" style="width:100%;">
-                    <div class="carousel-caption">
 
-                        <p>Childish Gambino - Camp Now Available for just $7.77</p>
-                    </div>
-                </div>
-
-                <div class="item">
-                    <img src="{{ asset('img/items/Gambino_940x355.png') }}" alt="" style="width:100%;">
-                    <div class="carousel-caption">
-
-                        <p>Childish Gambino - Camp Now Available for just $6.66</p>
-                    </div>
-                </div>
-
-                <div class="item">
-                    <img src="{{ asset('img/items/Gambino_940x355.png') }}" alt="" style="width:100%;">
-                    <div class="carousel-caption">
-
-                        <p>Childish Gambino - Camp Now Available for just $5.55</p>
-                    </div>
-                </div>
                 <a class="left carousel-control" href="#myCarousel" data-slide="prev">
 
                 </a>
@@ -58,12 +33,14 @@
             <div class="bottom-cont">
                 <div class="carousel-bottom-left ">
                     <!--<div class=" carousel slide v-align-m">-->
+
+
                     <ol class="carousel-indicators v-align-m v-align-s">
-                        <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-                        <li data-target="#myCarousel" data-slide-to="1"></li>
-                        <li data-target="#myCarousel" data-slide-to="2"></li>
-                        <li data-target="#myCarousel" data-slide-to="3"></li>
-                        <li data-target="#myCarousel" data-slide-to="4"></li>
+                        @php ($indicate_count = 0)
+                    @foreach($discount_items as $discount)
+                        <li id="{{$indicate_count}}" data-target="#myCarousel" data-slide-to="{{$indicate_count}}" class="indicate-slide {{$indicate_count == 0 ? 'active' : ''}}"></li>
+                        @php ($indicate_count += 1)
+                    @endforeach
                     </ol>
                     <!--</div>-->
                 </div>

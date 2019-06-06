@@ -12,12 +12,14 @@
 */
 
 use App\Brand;
+use App\DiscountItem;
 
 Route::get('/', function () {
     $brands = Brand::all();
+    $discount_items = DiscountItem::all();
     $featuredItems = DB::table('items')->where('relevance', '=', 'featured')->get();
     $latestItems = DB::table('items')->where('relevance', '=', 'latest')->get();
-    return view('index',compact('brands', 'featuredItems', 'latestItems'));
+    return view('index',compact('brands', 'featuredItems', 'latestItems', 'discount_items'));
 });
 
 Auth::routes();
